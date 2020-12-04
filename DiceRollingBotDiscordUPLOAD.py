@@ -41,12 +41,6 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    #dice rolling
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
     #$roll function
     if message.content.startswith('$roll'):
         nickname=message.author.display_name
