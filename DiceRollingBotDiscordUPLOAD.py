@@ -41,82 +41,93 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    #$dx; replace x with any number
-    if message.content.startswith('$d'):
-        #defines nickname to be the user's display name in the server
+    #dice rolling
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    #$roll function
+    if message.content.startswith('$roll'):
         nickname=message.author.display_name
-        #sets x equal to the 2nd index, should be equivalent to x
-        x=message.content[2:]
-        #makes x an integer
-        x2=int(x)
-        #rolls a random number between 1 and x2
-        roll=random.randint(1,x2)
-        #reformats roll to a string
-        rolls=str(roll)
-        #prints result to console
-        print(nickname,"rolled a d",x,"and got",rolls)
-        #if someone rolls a d20 using this command and gets a 20 or a 1 there's a bit of flavor text
-        if message.content == "$d20":
-            if rolls == "1":  
-                await message.channel.send("That's rough buddy. {0} rolled a {1}.".format(nickname,rolls))
-            elif rolls == "20":
-                await message.channel.send("Congratulations! {0} rolled a {1}.".format(nickname,rolls))
+        #takes message text, strips away $multi and whitespace, replaces - with +- for easier splitting, and splits text
+        text=message.content
+        strip_text=text.strip("$roll ")
+        strip_replace_text=strip_text.replace("-","+-")
+        final_text=strip_replace_text.split("+")
+
+        #define lists
+        Dice_Rolls=[]
+        Modifiers=[]
+
+        #check if 'd' appears in any list elements, if it does sort into list Dice_Rolls, otherwise sort into list Modifiers
+        for d in final_text:
+            if ("d" in d):
+                Dice_Rolls.append(d)
             else:
-                await message.channel.send("{0} rolled a {1}.".format(nickname,rolls))
-        #sends result to channel: "(nickname) rolled a (total)"
-        else:
-            await message.channel.send("{0} rolled a {1}.".format(nickname,rolls))
+                Modifiers.append(d)
+     
+        #define variables
+        DRlength=len(Dice_Rolls)
+        rep=0
+        Rolls_Total=[]
 
+        #split Dice_Rolls into sub lists with structure [[y][x]]
+        Dice_Rolls_split=[i.split("d",1) for i in Dice_Rolls]
 
-    #$multi ydx; roll y of x-sided dice
-    if message.content.startswith('$multi'):
-        #defines nickname to be the user's display name in the server
-        nickname=message.author.display_name
-        #sets y equal to the 7th index, should be equivalent to y
-        y=message.content[7]
-        #makes y an integer
-        y2=int(y)
-        #sets x equal to the 9th index, should be equivalent to x
-        x=message.content[9:]
-        #makes x an integer
-        x2=int(x)
-        #sets k to 1 for the count on the while loop
-        k=1
-        #creates C as an empty list
-        C=[]
-        #rolls y random numbers, and appends them to C
-        while k <= y2:
-            k=k+1
-            roll=random.randint(1,x2)
-            C.append(roll)
-        #sums up all values in C
-        t=sum(C)
-        #reformats roll to a string
-        rolls=str(t)
-        #prints result to console
-        print(nickname,"rolled",y,"d",x,"and got",rolls, C)
-        #sends results to channel, including what each individual roll was
-        await message.channel.send("{0} rolled a {1}.".format(nickname,rolls))
-        await message.channel.send(C)
-    
+        #while loop to roll [y] dice of [x] sides for all occurances in Dice_Rolls_Split
+        while rep < DRlength:
+            rep2=0
+            start=int(Dice_Rolls_split[rep][0])
+            while rep2 < start:
+                rep2=rep2+1
+                num2=int(Dice_Rolls_split[rep][1])
+                roll=random.randint(1,num2)
+                Rolls_Total.append(roll)
+            rep=rep+1
+        sumRT=sum(Rolls_Total)
+
+        #create 2 new lists, Modminus and Modplus
+        Modminus=[]
+        Modplus=[]
+
+        #check if a '-' appears in any list elements of Modifiers, if it does sort into list Modminus, if it doesn't sort into list Modplus
+        for minus in Modifiers:
+            if ("-" in minus):
+                Modminus.append(minus)
+            else:
+                Modplus.append(minus)
+
+        #sum Modplus
+        Modplus_int=list(map(int,Modplus))
+        Modplus_sum=sum(Modplus_int)
+
+        #sum Modminus
+        Modminus_int=list(map(int,Modminus))
+        Modminus_sum=sum(Modminus_int)
+
+        #sum all lists together to get final answer
+        final_sum=sumRT+Modplus_sum+Modminus_sum
+
+        #send messages to channel
+        await message.channel.send("{0} rolled a {1}.".format(nickname,final_sum))
+        await message.channel.send("Dice Rolls: {0}, Positive Modifiers: {1}, Negative Modifiers: {2}.".format(sumRT,Modplus_sum,Modminus_sum))
+        
+        #print messages to console
+        print(nickname,message.author,"rolled a total of",final_sum,"with Dice Rolls totaling",sumRT,"and modifiers totaling",Modminus_sum+Modplus_sum)
+
     #$commands
-    #lists all available commands 
     if message.content.startswith("$commands"):
         await message.channel.send("**List of current commands:**\n"
             "**$info**\n"
             "Lists the prefix, bot developer, and coding information.\n"
             "\n"
-            "**$dx:**\n"
-            "Rolls 1 die with x sides.\n"
-            "\n"
-            "**$multi ydx:**\n"
-            "Rolls y dice with x sides.\n"
+            "**$roll ydx +z:**\n"
+            "Rolls y dice with x sides and z modifiers. As many types of dice as necessary with any modifiers necessary can be rolled at once.\n"
             )
-        #prints result to console
         print(nickname,message.author,"requested the commands list")
 
     #$info
-    #information about bot
     if message.content.startswith("$info"):
         await message.channel.send("**Bot Info**\n"
             "\n"
@@ -130,7 +141,6 @@ async def on_message(message):
             "Programmed in Python 3.7. Open source. Code available at https://github.com/godofbooks/diceroller-discord. \n"
             "\n"
             )
-        #prints result to console
         print(nickname,message.author,"requested the info list")
 
 #runs the bot
