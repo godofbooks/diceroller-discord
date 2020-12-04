@@ -7,8 +7,9 @@ Feel free to use and modify the code as you'd like. Credit is appreciated.
 
 
 ## Resources used:
-[realpython: how to make a discord bot] (https://realpython.com/how-to-make-a-discord-bot-python/)
-[discord.py documentation] (https://discordpy.readthedocs.io/en/latest/index.html)
+https://realpython.com/how-to-make-a-discord-bot-python/
+
+https://discordpy.readthedocs.io/en/latest/index.html
 
 ## Please Note:
-Commands begin with '$' as the default, however this is quite easy to edit. 
+Commands begin with '$' as the default. This can be changed to any character you would like.  
