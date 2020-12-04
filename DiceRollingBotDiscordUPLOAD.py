@@ -46,7 +46,7 @@ async def on_message(message):
         nickname=message.author.display_name
         #takes message text, strips away $multi and whitespace, replaces - with +- for easier splitting, and splits text
         text=message.content
-        strip_text=text.strip("$roll ")
+        strip_text=text.strip("$roll, ")
         strip_replace_text=strip_text.replace("-","+-")
         final_text=strip_replace_text.split("+")
 
