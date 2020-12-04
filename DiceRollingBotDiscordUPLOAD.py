@@ -124,7 +124,7 @@ async def on_message(message):
             "$\n"
             "\n"
             "**Bot Developer**\n"
-            "godofbooks#1125\n"
+            "godofbooks (https://github.com/godofbooks)\n"
             "\n"
             "**Programming and useage**\n"
             "Programmed in Python 3.7. Open source. Code available at https://github.com/godofbooks/diceroller-discord. \n"
