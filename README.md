@@ -5,8 +5,12 @@ This code was developed by godofbooks (https://github.com/godofbooks) as a perso
 
 Feel free to use and modify the code as you'd like. Credit is appreciated.
 
+
 resources used:
 
 https://realpython.com/how-to-make-a-discord-bot-python/
 
 https://discordpy.readthedocs.io/en/latest/index.html
+
+
+commands begin with '$' as the default, however this is quite easy to edit. 
