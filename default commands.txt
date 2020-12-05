@@ -1,0 +1,15 @@
+#diceroller_discord default commands
+
+default prefix: $
+
+$roll ydx +z
+	rolls y dice of x sides; z can be any number of additional dice and/or modifiers
+
+$dx
+	rolls 1 die of x sides; no modifiers or other additional arguments are accepted
+
+$help
+	displays the help list
+
+$info
+	displays the developer name, and bot information 
