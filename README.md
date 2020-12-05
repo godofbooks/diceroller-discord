@@ -5,6 +5,8 @@ This code was developed by godofbooks (https://github.com/godofbooks) as a perso
 
 Feel free to use and modify the code as you'd like. Credit is appreciated.
 
+The image diceroller_discord_pfp.png is a screenshot of a d20 that I rendered. You are welcome to use and modify that image as you'd like. 
+
 
 ## Resources used:
 https://realpython.com/how-to-make-a-discord-bot-python/
