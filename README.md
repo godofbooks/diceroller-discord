@@ -3,12 +3,18 @@ A very simple dice rolling bot for Discord. Programmed in Python 3.7. Open sourc
 
 This code was developed by godofbooks (https://github.com/godofbooks) as a personal project.
 
-Feel free to use and modify the code as you'd like. Credit is appreciated.
+Feel free to use and modify the code as you'd like. Credit is appreciated. 
 
-The image diceroller_discord_pfp.png is a screenshot of a d20 that I rendered. You are welcome to use and modify that image as you'd like. 
+## Files Available:
+diceroller_discord_code.py: The code for the bot
 
+diceroller_discord_code_super_commented_version: The code for the bot with extra comments added in. Both versions are the same otherwise.
 
-## Resources used:
+drb.env: The .env file that allows the code to access the bot token without storing it in the code. This is a necessary download for the code to work.
+
+diceroller_discord_pfp.png: A screenshot of a  wireframe d20 that I rendered. I use this as the pfp for my version of the bot. You are welcome to use and modify this image as you'd like.
+
+## Resources Used:
 https://realpython.com/how-to-make-a-discord-bot-python/
 
 https://discordpy.readthedocs.io/en/latest/index.html
