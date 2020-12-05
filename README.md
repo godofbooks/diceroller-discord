@@ -14,6 +14,8 @@ drb.env: The .env file that allows the code to access the bot token without stor
 
 diceroller_discord_pfp.png: A screenshot of a  wireframe d20 that I rendered. I use this as the pfp for my version of the bot. You are welcome to use and modify this image as you'd like.
 
+default_commands.txt: A .txt file containing the default commands for the bot. Not necessary for bot functionality, just a reference. 
+
 ## Resources Used:
 https://realpython.com/how-to-make-a-discord-bot-python/
 
