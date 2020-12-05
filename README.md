@@ -12,6 +12,6 @@ https://realpython.com/how-to-make-a-discord-bot-python/
 https://discordpy.readthedocs.io/en/latest/index.html
 
 ## Please Note:
-Commands begin with '$' as the default. This can be changed to any character you would like. 
+Commands begin with '$' as the default. This can be changed to any character you would like by changing the value of the variable "bot_prefix". 
 
 It is important to also download the drb.env file available. This prevents you from having to put your bot's token (which is dangerous if it gets into the wrong hands!) in your code directly. 
