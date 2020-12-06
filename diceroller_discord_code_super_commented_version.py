@@ -194,7 +194,7 @@ async def on_message(message):
              await message.channel.send("Sorry, there was an error. Make sure you're typing the rolls right! If you need help, type $help")
              print("{0} caused an error: {1}".format(message.author,error))
 
-    #$commands
+    #$help
     if message.content.startswith("{0}help".format(bot_prefix)):
         await message.channel.send("**List of current commands:**\n"
             "\n"
